@@ -391,9 +391,8 @@
     function hitTarget(idx) {
       let target = ballsData[idx];
       if (!target) {
-        alert("游戏结束！得分："+oScore.innerText+" 点击确定重玩");
+        alert("游戏结束！得分:"+oScore.innerText+"&nbsp;&nbsp;&nbsp; 点击确定重玩");
         location.reload();
-        return false;
       }
       placeBall(target, bullet.color);
       let colorBalls = findSeriesNode([idx], true);
