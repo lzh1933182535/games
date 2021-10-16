@@ -391,7 +391,7 @@
     function hitTarget(idx) {
       let target = ballsData[idx];
       if (!target) {
-        alert("GAME OVER");
+        alert("游戏结束！得分："+oScore.innerText+" 点击确定重玩");
         location.reload();
         return false;
       }
