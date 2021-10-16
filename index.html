@@ -160,6 +160,12 @@
       </div>
     </div>
     <div class="score-area">
+      <select name="name" id="difficulty">
+        <option value="20000">简单</option>
+        <option value="15000">一般</option>
+        <option value="5000">困难</option>
+        <option value="3000">炼狱</option>
+      </select>
       <div class="start">开始游戏</div>
       <p>当前分数</p>
       <span class="score">0</span>
@@ -174,7 +180,8 @@
       oArrow = $('.arrow'),
       oBullet = $('.bullet'),
       oScore = $('.score'),
-      oStart = $('.start');
+      oStart = $('.start'),
+      oDifficulty = $('#difficulty');
 
     const size = 44, maxH = oBallArea.offsetHeight, maxW = oBallArea.offsetWidth, maxRows = ~~(maxH / size), maxColumns = ~~(maxW / size);
 
@@ -182,11 +189,14 @@
 
     let idx = 0;
 
+    let difficulty;
+
 
     init();
     initArrow();
     initBullte();
     oStart.addEventListener('click', function (e) {
+      difficulty = oDifficulty.value;
       let num = 19;
       oBallArea.addEventListener('mousedown', function (e) {
         let timer, speed = 18, oX = oBullet.offsetLeft, oY = oBullet.offsetTop;
@@ -234,12 +244,11 @@
         ballsData.filter((item) => { return item.connect === false; }).splice(0, num).forEach((item, index) => {
           return placeBall(item);
         })
-      }, 5000)
+      }, Number(difficulty))
     })
     function init() {
       let fragment = document.createDocumentFragment();
       for (let i = 0; i < maxRows; i++) {
-        //  (maxColumns - 0)(maxColumns - 1)
         let isOdd = !(i % 2 === 0);
         for (let j = 0; j < maxColumns - Number(isOdd); j++) {
           let ele = document.createElement('div');
@@ -391,7 +400,7 @@
     function hitTarget(idx) {
       let target = ballsData[idx];
       if (!target) {
-        alert("游戏结束！得分:"+oScore.innerText+"\n 点击确定重玩");
+        alert("GAME OVER 得分:"+oScore.innerText+"\n 点击确定重玩");
         location.reload();
         return false;
       }
