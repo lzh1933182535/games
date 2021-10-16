@@ -392,6 +392,7 @@
       let target = ballsData[idx];
       if (!target) {
         alert("GAME OVER");
+        init();
         return false;
       }
       placeBall(target, bullet.color);
